@@ -21,14 +21,14 @@ def leader_func(x):
 		channel.basic_publish(exchange = '', routing_key = selected_slave, body = 'Selected')
 	return
 
-def slave_func(x):
-	id_slave = x[0]
-	num_maps = x[1]
+def slave_func(x, y):
+	id_slave = x
+	num_maps = y
 
 	return id_slave
 
 
-#pw_leader = pywren.ibm_cf_executor(rabbitmq_monitor=True)
+pw_leader = pywren.ibm_cf_executor(rabbitmq_monitor=True)
 
 num_maps = int(input("Introdueixi el numero de slaves: "))
 data = []
@@ -37,12 +37,12 @@ for i in range(num_maps):
 
 print(data)
 
-#pw_leader.call_async(leader_func,num_maps)
+pw_leader.call_async(leader_func,num_maps)
 
 pw_slave = pywren.ibm_cf_executor(rabbitmq_monitor=True)
-pw_slave.map(slave_func, ids)
+pw_slave.map(slave_func, data)
 
 print(pw_slave.get_result())
-#pw_leader.clean()
+pw_leader.clean()
 pw_slave.clean()
 
