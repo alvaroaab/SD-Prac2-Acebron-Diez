@@ -28,8 +28,8 @@ python3 prac2.py
 
 ## Arquitectura i Implementació
 ### main
-El main és el que s'encarrega dengegar el leader i els slaves, dinicialitzar la llista utilitzada pels slaves i imprimir per pantalla el resultat dels slaves
-* 1r: Demana a lusuari el nombre de slaves/maps a executar
+El main és el que s'encarrega d'engegar el leader i els slaves, d'inicialitzar la llista utilitzada pels slaves i d'imprimir per pantalla el resultat dels slaves
+* 1r: Demana a l'usuari el nombre de slaves/maps a executar
 * 2n: Crea una llista data que conté llistes que contenen el id del slave i el número de slaves/maps
 * 3r: Engega el pywren del leader
 * 4t: Engega el pywren dels slaves
@@ -37,15 +37,15 @@ El main és el que s'encarrega dengegar el leader i els slaves, dinicialitzar la
 * 6è: Neteja les dades del COS
 
 ### Leader
-El leader és el que s'encarrega de rebre peticions descriptura i decidir quin slave permet escriure.
+El leader és el que s'encarrega de rebre peticions d'escriptura i decidir quin slave pot escriure.
 * 1r: Es connecta amb RabbitMQ
 * 2n: Declara els canals leader i leader_finished (aquest segon canal sutilitza per comprovar quan acaba un slave)
 * 3r: Es crea una llista amb els ids dels slaves
-* 4t: S'executen els slaves aleatòriament. Quan es permet l'escriptura dun slave, el leader s'espera a que el slave acabi
+* 4t: S'executen els slaves aleatòriament. Quan es permet l'escriptura d'un slave, el leader s'espera a que el slave acabi
 * 5è: S'esborren les cues i es tanquen les connexions
 
 ### Slave
-Les funcions slave generen un número aleatori entre 0 i 1000 i es sincronitzen amb la resta dslaves per incloure el valor aleatori a totes les llistes de resultat.
+Els slaves generen un número aleatori entre 0 i 1000 i es sincronitzen amb la resta de slaves per incloure el valor aleatori a totes les llistes de resultat.
 * 1r: Es connecta amb RabbitMQ
 * 2n: Declara els canals $id_slave, leader i leader_finished
 * 3r: Els slaves esperen a que el leader els permeti escriure
