@@ -10,6 +10,8 @@ pip3 install awscli --upgrade --user
 pip3 install -U ibm-cos-sdk --upgrade --user
 pip3 install boto3 --upgrade
 pip3 install pyyaml --upgrade
+pip3 install pika
+pip3 install pywren-ibm-cloud
 ```
 * Fer login a ibmcloud:
 ```
