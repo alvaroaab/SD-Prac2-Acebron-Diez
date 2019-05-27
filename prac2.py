@@ -73,7 +73,22 @@ pw_leader.call_async(leader_func,num_maps)
 pw_slave = pywren.ibm_cf_executor(rabbitmq_monitor=True)
 pw_slave.map(slave_func, data)
 
-print(pw_slave.get_result())
+result_lists = pw_slave.get_result()
+
+if(len(result_lists)>0):
+
+	print("\n\nLlistes:")
+	print(result_lists)
+	eq_lists = 'True'
+	for i in range(len(result_lists)-1):
+		if(eq_lists):
+			eq_lists = result_lists[i] == result_lists[i+1]
+		else:
+			print("\nLes llistes són diferents!\n\n")
+			break
+
+	if(eq_lists):
+		print("\nLes llistes són iguals!\n\n")
+
 pw_leader.clean()
 pw_slave.clean()
-
